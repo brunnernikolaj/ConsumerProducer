@@ -17,7 +17,12 @@ import java.util.logging.Logger;
 public class Consumer implements Runnable {
 
     private BlockingQueue<Long> in;
+    private long sum;
 
+    public long getSum() {
+        return sum;
+    }
+    
     public Consumer(BlockingQueue<Long> in) {
         this.in = in;
     }
@@ -28,13 +33,11 @@ public class Consumer implements Runnable {
         while (true) {
             try {               
                 cur = in.take(); 
-               
+                sum += cur;
                 System.out.println("Number : " + cur);
             } catch (InterruptedException ex) {
                 break;
             }
-
         }
     }
-
 }
